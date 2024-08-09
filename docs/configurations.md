@@ -7,6 +7,8 @@
     * [Commento](#commento)
     * [Utterances](#utterances)
     * [Giscus](#giscus)
+    * [Cusdis](#cusdis)
+* [Syntax Highlight](#syntax-highlight)
 * [Theme Parameters](#theme-parameters)
   * [Social Icons Configuration](#social-icons-configuration)
   * [Menu Items Configurations](#menu-items-configurations)
@@ -26,6 +28,8 @@ This theme supports:
   * [Commento](https://commento.io/)
   * [Utterances](https://utteranc.es/)
   * [Giscus](https://giscus.app/)
+  * [Cusdis](https://cusdis.com/)
+  * [Telegram](https://comments.app/)
 
 ### Commenting Systems
 
@@ -71,6 +75,40 @@ Follow [these steps](https://gohugo.io/content-management/comments/#configure-di
   loading = ""
 ```
 
+#### Telegram
+
+```toml
+[params.telegram] # https://comments.app/
+  siteID = ""
+  limit = ""
+  height = ""
+  color = ""
+  dislikes = ""
+  outlined = ""
+  colorful = ""
+  dark = ""
+```
+
+#### Cusdis
+
+```toml
+[params.cusdis] # https://cusdis.com
+  data_app_id = ""
+```
+
+## Syntax Highlight
+
+The theme uses the Goldmark syntax highlight system. GitHub light and dark are set as the default styles. To choose a different style, make sure `noClasses` is not set to false (default is true) and add to your `config.toml`:
+
+```
+[markup.highlight]
+style = "monokai"
+```
+
+All `style` are available [here](https://xyproto.github.io/splash/docs/all.html).
+
+Alternatively, it is possible to use custom styles with generated CSS files. See [here](https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css).
+
 ## Theme Parameters
 
 These are all the parameters used by `hugo-coder` theme.
@@ -83,9 +121,12 @@ These are all the parameters used by `hugo-coder` theme.
 | keywords                      | string | Yes      | Site keywords.                                   |                                  | `"blog,developer,personal"`                      |
 | avatarURL                     | string | No       | Photo of the author.                             |                                  | `"images/avatar.jpg"`                            |
 | gravatar                      | string | No       | Gravatar photo of the author                     |                                  | `"john.doe@example.com"`                         |
+| faviconSVG                    | string | No       | Custom path to a SCG favicon.                    | `"/img/favicon.svg"`             | `"/img/favicon.svg"`                             |
 | favicon_32                    | string | No       | Custom path to a 32x32 favicon.                  | `"/img/favicon-32x32.png"`       | `"/img/favicon-32x32.png"`                       |
 | favicon_16                    | string | No       | Custom path to a 16x16 favicon.                  | `"/img/favicon-16x16.png"`       | `"/img/favicon-16x16.png"`                       |
-| touchIcon                     | string | No       | Custom path to a touch-icon                      | `"/images/apple-touch-icon.png"` | `"/images/apple-touch-icon.png"`                 |
+| touchIcon                     | string | No       | Custom path to an apple-touch-icon                      | `"/images/apple-touch-icon.png"` | `"/images/apple-touch-icon.png"`                 |
+| mask_icon                     | string | No       | Custom path to a mask-icon                      | `"/images/safari-pinned-tab.svg"` | `"/images/safari-pinned-tab.svg"`                 |
+| mask_icon_color                     | string | No       | Custom color for mask-icon color                      | `"#5bbad5"` | `"#5bbad5"`                 |
 | since                         | string | No       | Date shown in the footer before now year         |                                  | `"2020"`                                         |
 | maxSeeAlsoItems               | number | No       | Series see also post count                       | `5`                              | `10`                                             |
 | commit                        | string | No       | Show the last git commit in the footer           |                                  | `"https://github.com/luizdepra/hugo-coder/tree/"`|
@@ -93,12 +134,13 @@ These are all the parameters used by `hugo-coder` theme.
 | math                          | bool   | No       | Enable MathJax Module and add JS into your site. | `false`                          | `true` or `false`                                |
 | katex                         | bool   | No       | Enable katex for all content types.              | `false`                          | `true` or `false`                                |
 | colorScheme                   | string | No       | Specify light/dark colorscheme                   | `"auto"`                         | `"auto"` or `"light"` or `"dark"`                |
-| hideColorSchemeToggle         | bool   | No       | If true, hides the color sheme toggle            | `false`                          | `true` or `false`                                |
+| hideColorSchemeToggle         | bool   | No       | If true, hides the color scheme toggle            | `false`                          | `true` or `false`                                |
 | customCSS                     | list   | No       | Add extra CSS files to the website.              | []                               | `["css/extra-style.css"]`                        |
 | customSCSS                    | list   | No       | Add extra SCSS files to the website.             | []                               | `["scss/extra-style.scss"]`                      |
 | customJS                      | list   | No       | Add extra JS files to the website.               | []                               | `["js/extra-script.js"]`                         |
-| customRemoteJS                | list   | No       | Add extra remote JS files to the website.        | []                               | `["https://www.example.com/file.js"]` |
+| customRemoteJS                | list   | No       | Add extra remote JS files to the website.        | []                               | `["https://www.example.com/file.js"]`            |
 | enableTwemoji                 | bool   | No       | Adds support for Twemoji                         | `false`                          | `true` or `false`                                |
+| disableDefaultJsScripts       | bool   | No       | If true, disables default js scripts (coder.js)  | `false`                          | `true` or `false`                                |
 
 ### Social Icons Configuration
 
@@ -107,7 +149,7 @@ Social Icons are optional. To use them you will need to set at least all the fol
 | Configuration  | Type   | Required | Description                              | Example                         |
 | -------------- | ------ | -------- | ---------------------------------------- | ------------------------------- |
 | name           | string | Yes      | Icon name.                               | `"Github"`                      |
-| icon           | string | Yes      | ForkAwesome icon classes.                | `"fa fa-github"`                |
+| icon           | string | Yes      | FontAwesome icon classes.                | `"fa-brands fa-github"`         |
 | weight         | int    | Yes      | Icon order.                              | `1`                             |
 | url            | string | Yes      | URL to redirect.                         | `"https://github.com/johndoe/"` |
 
@@ -116,17 +158,17 @@ An example:
 ```toml
 [[params.social]]
   name = "Github"
-  icon = "fa fa-github fa-2x"
+  icon = "fa-brands fa-github fa-2x"
   weight = 1
   url = "https://github.com/johndoe/"
 [[params.social]]
   name = "Gitlab"
-  icon = "fa fa-gitlab fa-2x"
+  icon = "fa-brands fa-gitlab fa-2x"
   weight = 2
   url = "https://gitlab.com/johndoe/"
 [[params.social]]
   name = "Twitter"
-  icon = "fa fa-twitter fa-2x"
+  icon = "fa-brands fa-x-twitter fa-2x"
   weight = 3
   url = "https://twitter.com/johndoe/"
 ```
@@ -140,6 +182,7 @@ Menu Items are optional. To use them you will need to set all the following requ
 | name           | string | Yes      | Menu Item name.                          | `"Posts"`                       |
 | weight         | int    | Yes      | Menu Item order.                         | `1`                             |
 | url            | string | Yes      | URL to redirect.                         | `"/posts/"`                     |
+| class          | string | No       | Menu Item extra class attribute.         | `"menu-item"`                   |
 | target         | string | No       | URL target attribute.                    | `"_blank"`                      |
 | rel            | string | No       | URL rel attribute.                       | `"alternate"`                   |
 | type           | string | No       | URL type attribute.                      | `"application/rss+xml"`         |
@@ -171,7 +214,7 @@ CSP stands for [Content Security Policy](https://developers.google.com/web/funda
 | objectsrc      | string list | Yes      |             | `["'self'"]`                    |
 | stylesrc       | string list | Yes      |             | `["'self'"]`                    |
 | scriptsrc      | string list | Yes      |             | `["'self'"]`                    |
-| prefetchsrc    | string list | Yes      |             | `["'self'"]`                    |
+| connectsrc     | string list | Yes      |             | `["'self'"]`                    |
 
 An example:
 
@@ -198,7 +241,8 @@ An example:
     "'unsafe-inline'",
     "https://www.google-analytics.com"
   ]
-  prefetchsrc = ["'self'"]
+  # connect-src directive – defines valid targets for XMLHttpRequest (AJAX), WebSockets or EventSource
+  connectsrc = ["'self'"]
 ```
 
 ## Complete Example
@@ -214,11 +258,12 @@ defaultcontentlanguage = "en"
 
 paginate = 20
 
-pygmentsstyle = "bw"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
-
+[services]
+[services.disqus]
 disqusShortname = "yourdiscussshortname"
+
+[markup.highlight]
+style = "github-dark"
 
 [params]
   author = "John Doe"
@@ -228,6 +273,7 @@ disqusShortname = "yourdiscussshortname"
   avatarurl = "images/avatar.jpg"
   #gravatar = "john.doe@example.com"
 
+  faviconSVG = "/img/favicon.svg"
   favicon_32 = "/img/favicon-32x32.png"
   favicon_16 = "/img/favicon-16x16.png"
 
@@ -251,17 +297,17 @@ disqusShortname = "yourdiscussshortname"
 # Social links
 [[params.social]]
   name = "Github"
-  icon = "fa fa-github fa-2x"
+  icon = "fa-brands fa-github fa-2x"
   weight = 1
   url = "https://github.com/johndoe/"
 [[params.social]]
   name = "Gitlab"
-  icon = "fa fa-gitlab fa-2x"
+  icon = "fa-brands fa-gitlab fa-2x"
   weight = 2
   url = "https://gitlab.com/johndoe/"
 [[params.social]]
   name = "Twitter"
-  icon = "fa fa-twitter fa-2x"
+  icon = "fa-brands fa-x-twitter fa-2x"
   weight = 3
   url = "https://twitter.com/johndoe/"
 
@@ -288,16 +334,17 @@ This theme includes one content type:
 
 These are the front matter variables used by `hugo-coder` theme.
 
-| Name             | Type   | Required | Description                                        | Default | Example                                                                       |
-| ---------------- | ------ | -------- | -------------------------------------------------- | ------- | ----------------------------------------------------------------------------- |
-| tags             | list   | No       | Add tag(s) to this post.                           |         | `["Hugo", "Go"]`                                                              |
-| categories       | list   | No       | Add categorie(s) to this post.                     |         | `["Hugo", "Go"]`                                                              |
-| series           | list   | No       | Add series to this post (used by OpenGraph).       |         | `["Theme Demo"]`                                                              |
-| author           | list   | No       | Add author to this post.                           |         | `["John Doe"]`                                                                |
-| externalLink     | string | No       | Link to an external post.                          |         | `"https://github.com/luizdepra/hugo-coder/wiki"`                              |
-| featuredImage    | string | No       | Link/path to add an image below post metadata.     |         | `"https://github.com/luizdepra/hugo-coder/blob/master/images/screenshot.png"` |
-| math             | bool   | No       | If true, MathJax is enabled only for this post.    | `false` | `true` or `false`                                                             |
-| katex            | bool   | No       | If true, katex is enabled only for this post.      | `false` | `true` or `false`                                                             |
-| disableComments  | bool   | No       | If true, comments are disabled.                    | `false` | `true` or `false`                                                             |
+| Name             | Type   | Required | Description                                        | Default | Example                                                                         |
+| ---------------- | ------ | -------- | -------------------------------------------------- | ------- | ------------------------------------------------------------------------------- |
+| tags             | list   | No       | Add tag(s) to this post.                           |         | `["Hugo", "Go"]`                                                                |
+| categories       | list   | No       | Add categorie(s) to this post.                     |         | `["Hugo", "Go"]`                                                                |
+| series           | list   | No       | Add series to this post (used by OpenGraph).       |         | `["Theme Demo"]`                                                                |
+| author           | list   | No       | Add author to this post.                           |         | `["John Doe"]`                                                                  |
+| externalLink     | string | No       | Link to an external post.                          |         | `"https://github.com/luizdepra/hugo-coder/wiki"`                                |
+| featuredImage    | string | No       | Link/path to add an image below post metadata.     |         | `"https://github.com/luizdepra/hugo-coder/blob/master/images/screenshot.png"`   |
+| math             | bool   | No       | If true, MathJax is enabled only for this post.    | `false` | `true` or `false`                                                               |
+| katex            | bool   | No       | If true, katex is enabled only for this post.      | `false` | `true` or `false`                                                               |
+| disableComments  | bool   | No       | If true, comments are disabled.                    | `false` | `true` or `false`                                                               |
+| canonicalUrl     | string | No       | Link to override <link rel="canonical"/> in <head> | `false` | `"https://my-company.com/blog/my-blog-post-that-I-repost-without-hurtiong-seo"` |
 
 > "tags", "categories", "series" and "authors" are taxonomies defined in the `config.toml` file.
